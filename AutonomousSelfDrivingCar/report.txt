@@ -1,0 +1,25 @@
+Report: COL333 (Introduction to Artificial Intelligence) Assignment 3
+Team members: Earavelly Sriharshitha (2020CS10345), Bolem Venkata Sai Surya Vidya Charan (2020CS10334)
+
+Algorithms tried: Exact Inference, Particle Filtering
+
+Description:
+
+At first, for estimating the states of the opposite car and where it is present, we have randomly initialised some previously assumed number of particles in the grid (3000 here). This is done by using the given current states, i.e., the initial states given in the transition probability dictionary.
+ 
+	Next, we've defined a new dictionary to get all the current states, next possible states and the possibility, i.e., the transition probability from the given transProb dictionary. And also, we've defined a function called changeBelief, which updates the beliefs based on particle probabilities.
+
+	Also, we've defined a random weighting function. This function selects a variable from the given list of the variables and their weights based on their weights. This is used in order to affect the particle distribution according to the given weights assigned to it. Next step is transition of it according to the given and observed distances, i.e., the information available. After this, resampling is done in order to retain and update all the particles again to coordinate the moving cars.
+
+This is the complete method of particle filtering which we've used in the estimator.py file.
+
+For intelligentPlayer.py file:
+
+	While planning the path for Intelligent driver taking the estimations all the other opposite cars, what we have done is as follows. 
+We have seen the next possible nodes of our present state. Then, we have gone to the node whose probability of having cars is the least. 
+(The probability of having all cars at a node is calculated by adding the belief grid of each car).
+
+	For knowing the node whose probability is the least, a priority queue for all the possible next nodes is maintained with keys as the total probablity of the opposite car being there and values as the coordinates of the next possible position. Then we've took the first non-repeated state (this is done to remove the possible back and forth oscillations) and assigned it to the goal state.
+
+	Also, we've taken care about the updation of checkpoints so far variable and it's usage to determine the next goal.
+
